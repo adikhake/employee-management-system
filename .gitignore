@@ -1,0 +1,20 @@
+# Ignore Eclipse workspace
+.metadata/
+
+# Ignore IntelliJ
+.idea/
+*.iml
+
+# Ignore VS Code
+.vscode/
+
+# Ignore build output
+target/
+build/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
