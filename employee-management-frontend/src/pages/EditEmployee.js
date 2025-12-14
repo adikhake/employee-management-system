@@ -1,10 +1,9 @@
-// src/pages/EditEmployee.js
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../api/api";
 
 export default function EditEmployee() {
-  const { id } = useParams(); // expects route like /employee/edit/:id
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -31,7 +30,6 @@ export default function EditEmployee() {
       setLoading(true);
       setError("");
       try {
-        // DEBUG: show token/user stored locally
         console.log("EditEmployee: token =>", localStorage.getItem("token"));
         console.log("EditEmployee: user =>", JSON.parse(localStorage.getItem("user") || "null"));
 
@@ -39,7 +37,6 @@ export default function EditEmployee() {
         const e = res.data ?? {};
         console.log("Fetched employee (res.data):", e);
 
-        // flexible mapping (handles camelCase or snake_case)
         setFirstName(e.firstName ?? e.first_name ?? "");
         setLastName(e.lastName ?? e.last_name ?? "");
         setEmail(e.email ?? e.username ?? "");
@@ -50,14 +47,9 @@ export default function EditEmployee() {
         setBirthDate(e.birthDate ?? e.birth_date ?? "");
       } catch (err) {
         console.error("Load employee error:", err);
-        // show friendly message
         if (err?.response?.status === 401) {
           setError("Authentication required to load this employee. (401)");
-          // *** DO NOT auto logout here while debugging ***
-          // If you want to auto-logout after debugging, uncomment:
-          // localStorage.removeItem("token");
-          // localStorage.removeItem("user");
-          // navigate("/login");
+         
         } else {
           setError(err?.response?.data?.message || err?.message || "Failed to load employee");
         }
@@ -86,7 +78,6 @@ export default function EditEmployee() {
       birthDate,
     };
 
-    // If backend expects snake_case use payloadSnake
     const payloadSnake = {
       first_name: firstName,
       last_name: lastName,
@@ -97,21 +88,14 @@ export default function EditEmployee() {
       gender,
       birth_date: birthDate,
     };
-
     try {
-      // Try camelCase first. If backend rejects, switch to snake_case.
       await api.put(`/employees/${id}`, payloadCamel);
-      // await api.put(`/employees/${id}`, payloadSnake); // try this if camelCase fails
       setSuccess("Employee updated successfully.");
       setTimeout(() => navigate("/employee/search"), 700);
     } catch (err) {
       console.error("Update error:", err);
       if (err?.response?.status === 401) {
-        setError("Authentication required to update this employee. (401)");
-        // optional: clear storage + navigate — keep commented while debugging:
-        // localStorage.removeItem("token");
-        // localStorage.removeItem("user");
-        // navigate("/login");
+        setError("Authentication required to update this employee. (401)");       
       } else {
         setError(err?.response?.data?.message || err?.message || "Update failed");
       }
