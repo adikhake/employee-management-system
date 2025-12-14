@@ -1,0 +1,82 @@
+:root {
+  --primary: #2a87b8;
+  --muted: #f4f6f8;
+}
+
+body, html, #root {
+  margin: 0; padding: 0; height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.brand { font-weight: 700; font-size: 20px; }
+
+.main { display: flex; height: calc(100vh - 56px); }
+
+.sidebar {
+  width: 220px; background: #25343a; color: white; padding: 16px 8px;
+}
+.sidebar a { color: #cfe6f5; text-decoration: none; display: block; padding: 8px 12px; }
+.sidebar a.active { background: rgba(255,255,255,0.06); border-radius: 4px; }
+
+.content { flex: 1; padding: 24px; background: var(--muted); overflow: auto; }
+
+.card { background: white; padding: 18px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.auth-card { width: 360px; margin: 40px auto; padding: 26px; background: white; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.auth-card input { width: 100%; padding: 8px; margin: 6px 0 12px; box-sizing: border-box; }
+
+.primary { background: var(--primary); color: white; border: 0; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
+.link-btn { background: none; border: none; color: var(--primary); cursor: pointer; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: end; }
+label { display: block; font-size: 13px; margin-bottom: 6px; color: #333; }
+input, select, textarea { padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 100%; box-sizing: border-box; }
+
+.info { padding: 8px; background: #e6f7ff; border-radius: 4px; margin-bottom: 12px; }
+.error { padding: 8px; background: #ffdede; border-radius: 4px; margin-bottom: 12px; }
+
+.table { width: 100%; border-collapse: collapse; margin-top: 12px; background: white; }
+.table th, .table td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+.search-form { display:flex; gap:8px; align-items:center; margin-bottom: 12px; }
+.search-form input { flex: 1; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2f8bb0; 
+  padding: 12px 20px;
+  color: #fff;
+}
+
+.top-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.link-btn {
+  background: transparent;
+  border: none;
+  color: #fff;                 
+  font-weight: 600;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  user-select: none;          
+  -webkit-tap-highlight-color: transparent;
+}
+
+.link-btn:focus,
+.link-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+.link-btn:active {
+  transform: translateY(1px);
+}
